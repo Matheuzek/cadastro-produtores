@@ -1,88 +1,120 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Controle de Estoque</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Estoque - Sistema de Cadastro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .header, .footer {
+            background-color: #0d6efd;
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+        }
+        .form-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .btn-calculate {
+            background-color: #0d6efd;
+            color: white;
+        }
+    </style>
 </head>
 <body>
-  <div class="container mt-5">
-    <h1 class="text-center mb-4">Cadastro de Produtos</h1>
-    
-    <form id="produtoForm">
-      <div class="row mb-3">
-        <div class="col-md-3">
-          <label for="codigo" class="form-label">Código do produto</label>
-          <input type="text" class="form-control" id="codigo" name="codigo" required>
-        </div>
-        <div class="col-md-9">
-          <label for="descricao" class="form-label">Descrição</label>
-          <input type="text" class="form-control" id="descricao" name="descricao" required>
-        </div>
-      </div>
+    <div class="container">
+        <header class="header mb-4 rounded">
+            <h1>Controle de Estoque</h1>
+            <p class="lead">Sistema de cadastro de produtos</p>
+        </header>
 
-      <div class="row mb-3">
-        <div class="col-md-3">
-          <label for="quantidade" class="form-label">Quantidade em estoque</label>
-          <input type="number" class="form-control" id="quantidade" name="quantidade" required>
-        </div>
-        <div class="col-md-3">
-          <label for="largura" class="form-label">Largura do pacote (cm)</label>
-          <input type="number" step="0.01" class="form-control" id="largura" name="largura" required>
-        </div>
-        <div class="col-md-3">
-          <label for="altura" class="form-label">Altura do pacote (cm)</label>
-          <input type="number" step="0.01" class="form-control" id="altura" name="altura" required>
-        </div>
-        <div class="col-md-3">
-          <label for="profundidade" class="form-label">Profundidade do pacote (cm)</label>
-          <input type="number" step="0.01" class="form-control" id="profundidade" name="profundidade" required>
-        </div>
-      </div>
+        <div class="form-container">
+            <h2 class="mb-4">Cadastro de Produtos</h2>
+            
+            <form id="produtoForm">
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <label class="form-label">Código do produto</label>
+                        <input type="text" class="form-control" name="codigo" required>
+                    </div>
+                    <div class="col-md-9">
+                        <label class="form-label">Descrição</label>
+                        <input type="text" class="form-control" name="descricao" required>
+                    </div>
+                </div>
 
-      <div class="row mb-3">
-        <div class="col-md-3">
-          <label for="peso" class="form-label">Peso do pacote (kg)</label>
-          <input type="number" step="0.01" class="form-control" id="peso" name="peso" required>
-        </div>
-        <div class="col-md-3">
-          <label for="preco" class="form-label">Preço de venda (R$)</label>
-          <input type="number" step="0.01" class="form-control" id="preco" name="preco" required>
-        </div>
-        <div class="col-md-6 d-flex align-items-end justify-content-end">
-          <button type="button" class="btn btn-primary me-2" onclick="calcularFrete()">Calcular Frete</button>
-          <button type="submit" class="btn btn-success">Salvar Produto</button>
-        </div>
-      </div>
-    </form>
-  </div>
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <label class="form-label">Quantidade em estoque</label>
+                        <input type="number" class="form-control" name="quantidade" required>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Largura do pacote (cm)</label>
+                        <input type="number" step="0.01" class="form-control" name="largura" required>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Altura do pacote (cm)</label>
+                        <input type="number" step="0.01" class="form-control" name="altura" required>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Profundidade do pacote (cm)</label>
+                        <input type="number" step="0.01" class="form-control" name="profundidade" required>
+                    </div>
+                </div>
 
-  <script>
-    function calcularFrete() {
-      const peso = parseFloat(document.getElementById('peso').value);
-      const largura = parseFloat(document.getElementById('largura').value);
-      const altura = parseFloat(document.getElementById('altura').value);
-      const profundidade = parseFloat(document.getElementById('profundidade').value);
-      
-      let valorFrete = 0;
-      
-      if (peso <= 0.30) {
-        valorFrete = 8.00;
-      } else if (peso <= 1.00 && (largura < 50 || altura < 50 || profundidade < 50)) {
-        valorFrete = 15.00;
-      } else {
-        valorFrete = 30.00;
-      }
-      
-      alert(`Frete: R$ ${valorFrete.toFixed(2)}`);
-    }
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <label class="form-label">Peso do pacote (kg)</label>
+                        <input type="number" step="0.01" class="form-control" name="peso" required>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Preço de venda (R$)</label>
+                        <input type="number" step="0.01" class="form-control" name="preco" required>
+                    </div>
+                    <div class="col-md-6 d-flex align-items-end justify-content-end">
+                        <button type="button" class="btn btn-calculate me-2" onclick="calcularFrete()">Calcular Frete</button>
+                        <button type="submit" class="btn btn-success">Salvar Produto</button>
+                    </div>
+                </div>
+            </form>
+        </div>
 
-    document.getElementById('produtoForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      alert('Produto salvo com sucesso!');
-      this.reset();
-    });
-  </script>
+        <footer class="footer mt-5 rounded">
+            <p>Sistema de Controle de Estoque &copy; 2025</p>
+        </footer>
+    </div>
+
+    <script>
+        function calcularFrete() {
+            const form = document.getElementById('produtoForm');
+            const peso = parseFloat(form.elements['peso'].value);
+            const largura = parseFloat(form.elements['largura'].value);
+            const altura = parseFloat(form.elements['altura'].value);
+            const profundidade = parseFloat(form.elements['profundidade'].value);
+            
+            let frete = 0;
+            
+            if (peso <= 0.30) {
+                frete = 8.00;
+            } else if (peso <= 1.00 && (largura < 50 || altura < 50 || profundidade < 50)) {
+                frete = 15.00;
+            } else {
+                frete = 30.00;
+            }
+            
+            alert(`Frete: R$ ${frete.toFixed(2)}`);
+        }
+
+        document.getElementById('produtoForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Produto salvo com sucesso!');
+            this.reset();
+        });
+    </script>
 </body>
 </html>
